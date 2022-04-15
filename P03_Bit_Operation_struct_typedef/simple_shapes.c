@@ -15,23 +15,37 @@ Students: Create a new type "Graphic" that can store:
 - color
 */
 
+typedef enum {
+    OVAL, RECTANGLE
+} shape_t;
+
+
+typedef struct {
+    shape_t shape;
+    unsigned int size;
+    char *color;
+} Graphic;
+
 
 void paint(Graphic graphic) {
     double radius = graphic.size / 2.0;
-    int i,j;
+    int i, j;
 
-    for (i = 0; i <= 2 * radius; i++){
-        for (j = 0; j <= 2 * radius; j++){
-            switch(graphic.shape) {
-                case RECTANGLE: printf("%s*" RESET, graphic.color); break;
+    for (i = 0; i <= 2 * radius; i++) {
+        for (j = 0; j <= 2 * radius; j++) {
+            switch (graphic.shape) {
+                case RECTANGLE:
+                    printf("%s*" RESET, graphic.color);
+                    break;
                 case OVAL: {
                     double distance = sqrt((i - radius) * (i - radius) + (j - radius) * (j - radius));
                     if (distance > radius - 0.5 && distance < radius + 0.5) {
                         printf("%s*" RESET, graphic.color);
-                    } else { 
+                    } else {
                         printf(" ");
                     }
-                } break;
+                }
+                    break;
 
             }
         }
@@ -47,20 +61,32 @@ int main() {
         printf("Geben Sie die gewünschte Form an [OVAL=0 | RECTANGLE=1]:");
         scanf("%d", &input);
         // Students: store the input in graphic
+        graphic.shape = input;
 
         printf("Geben Sie die gewünschte Grösse an:");
         scanf("%u", &input);
         // Students: store the input in graphic
+        graphic.size = input;
 
-        printf("Geben Sie die gewünschte Farb an [RED=0 | GREEN=1 | YELLOW=2]:");
+        printf("Geben Sie die gewünschte Farbe an [RED=0 | GREEN=1 | YELLOW=2]:");
         scanf("%d", &input);
         // Students: store the input in graphic
-        
+        switch (input) {
+            case 0:
+                graphic.color = RED;
+                break;
+            case 1:
+                graphic.color = GRN;
+                break;
+            case 2:
+                graphic.color = YEL;
+                break;
+        }
+
         paint(graphic);
-        
-        while(getchar() != '\n'); // empty buffer
+        while (getchar() != '\n'); // empty buffer
         printf("\nMöchten sie weiter machen oder abbrechen? [(n)ext|(q)uit] ");
-    } while(getchar() == 'n');
+    } while (getchar() == 'n');
 
     printf("Byebye..\n");
     return EXIT_SUCCESS;
