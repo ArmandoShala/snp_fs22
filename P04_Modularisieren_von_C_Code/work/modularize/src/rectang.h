@@ -12,5 +12,5 @@
  * @brief Lab implementation
  */
 // begin students to add code for task 4.1
-
+boolean Rectangular(int a, int b, int c);
 // end students to add code

@@ -12,5 +12,5 @@
  * @brief Lab implementation
  */
 // begin students to add code for task 4.1
-
+int getInt(int maxResult);
 // end students to add code
